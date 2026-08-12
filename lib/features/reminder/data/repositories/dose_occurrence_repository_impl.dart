@@ -44,4 +44,15 @@ class DoseOccurrenceRepositoryImpl implements DoseOccurrenceRepository {
   Future<void> deleteOccurrence(String id) async {
     await _dataSource.deleteOccurrence(id);
   }
+
+  @override
+  Future<void> deleteOccurrencesByMedicine(String medicineId) async {
+    await _dataSource.deleteOccurrencesByMedicine(medicineId);
+  }
+
+  @override
+  Future<void> deleteFutureOccurrencesByMedicine(
+      String medicineId, DateTime fromDate) async {
+    await _dataSource.deleteFutureOccurrencesByMedicine(medicineId, fromDate);
+  }
 }

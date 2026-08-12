@@ -42,6 +42,18 @@ class FakeDoseOccurrenceRepository implements DoseOccurrenceRepository {
   Future<void> deleteOccurrence(String id) async {
     _storage.remove(id);
   }
+
+  @override
+  Future<void> deleteOccurrencesByMedicine(String medicineId) async {
+    _storage.removeWhere((_, occ) => occ.medicineId == medicineId);
+  }
+
+  @override
+  Future<void> deleteFutureOccurrencesByMedicine(
+      String medicineId, DateTime fromDate) async {
+    _storage.removeWhere((_, occ) =>
+        occ.medicineId == medicineId && !occ.scheduledAt.isBefore(fromDate));
+  }
 }
 
 void main() {

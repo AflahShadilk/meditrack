@@ -7,4 +7,7 @@ abstract class DoseOccurrenceRepository {
   Future<List<DoseOccurrence>> getOccurrences();
   Future<List<DoseOccurrence>> getOccurrencesByMedicine(String medicineId);
   Future<void> deleteOccurrence(String id);
+  Future<void> deleteOccurrencesByMedicine(String medicineId);
+  Future<void> deleteFutureOccurrencesByMedicine(
+      String medicineId, DateTime fromDate);
 }

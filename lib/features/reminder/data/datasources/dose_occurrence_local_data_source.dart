@@ -14,7 +14,7 @@ class DoseOccurrenceLocalDataSource {
 
   Future<void> saveOccurrences(List<DoseOccurrenceModel> occurrences) async {
     final Map<String, DoseOccurrenceModel> entries = {
-      for (var occ in occurrences) occ.id: occ
+      for (var occ in occurrences) occ.id: occ,
     };
     await _box.putAll(entries);
   }
@@ -34,5 +34,25 @@ class DoseOccurrenceLocalDataSource {
 
   Future<void> deleteOccurrence(String id) async {
     await _box.delete(id);
+  }
+
+  Future<void> deleteOccurrencesByMedicine(String medicineId) async {
+    final keysToDelete = _box.values
+        .where((occ) => occ.medicineId == medicineId)
+        .map((occ) => occ.id)
+        .toList();
+    await _box.deleteAll(keysToDelete);
+  }
+
+  Future<void> deleteFutureOccurrencesByMedicine(
+      String medicineId, DateTime fromDate) async {
+    final keysToDelete = _box.values
+        .where((occ) =>
+            occ.medicineId == medicineId && occ.scheduledAt.isAfter(fromDate) ||
+            (occ.medicineId == medicineId &&
+                occ.scheduledAt.isAtSameMomentAs(fromDate)))
+        .map((occ) => occ.id)
+        .toList();
+    await _box.deleteAll(keysToDelete);
   }
 }

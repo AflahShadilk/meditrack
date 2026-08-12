@@ -15,6 +15,13 @@ class MedicineRepositoryImpl implements MedicineRepository {
   }
 
   @override
+  Future<void> updateMedicine(Medicine medicine) async {
+    // Hive put() is an upsert — updateMedicine delegates to saveMedicine.
+    final model = MedicineModel.fromEntity(medicine);
+    await _dataSource.saveMedicine(model);
+  }
+
+  @override
   Future<Medicine?> getMedicine(String id) async {
     final model = await _dataSource.getMedicine(id);
     return model?.toEntity();
