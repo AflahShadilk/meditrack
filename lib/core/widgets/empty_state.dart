@@ -5,12 +5,14 @@ class EmptyState extends StatelessWidget {
   final String title;
   final String? message;
   final Widget? action;
+  final IconData? icon;
 
   const EmptyState({
     super.key,
     required this.title,
     this.message,
     this.action,
+    this.icon,
   });
 
   @override
@@ -21,6 +23,17 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (icon != null) ...[
+              Icon(
+                icon,
+                size: 48,
+                color: Theme.of(context)
+                    .colorScheme
+                    .onSurfaceVariant
+                    .withValues(alpha: 0.5),
+              ),
+              const SizedBox(height: AppSpacing.medium),
+            ],
             Text(
               title,
               style: Theme.of(context).textTheme.titleLarge,

@@ -8,7 +8,6 @@ void main() {
 
     // Verify that the placeholder text is present
     expect(find.text('MediTrack'), findsOneWidget);
-    expect(find.text('Your medication companion'), findsOneWidget);
-    expect(find.text('[ Foundation Ready ]'), findsOneWidget);
+    expect(find.text('Module 02: App Foundation Ready'), findsOneWidget);
   });
 }

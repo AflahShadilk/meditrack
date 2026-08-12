@@ -4,12 +4,15 @@ class AppColors {
   AppColors._();
 
   static const Color primary = Color(0xFF087F8C);
-  static const Color background = Color(0xFFF8F9FA);
-  static const Color surface = Colors.white;
+  static const Color success = Color(0xFF2E9D67);
+  static const Color warning = Color(0xFFE6A52B);
+  static const Color error = Color(0xFFD9534F);
+
+  static const Color background = Color(0xFFF7FAFA);
+  static const Color surface = Color(0xFFFFFFFF);
+
   static const Color textPrimary = Color(0xFF212529);
   static const Color textSecondary = Color(0xFF6C757D);
-  static const Color success = Color(0xFF2E7D32);
-  static const Color warning = Color(0xFFED6C02);
-  static const Color error = Color(0xFFD32F2F);
+  static const Color border = Color(0xFFE0E0E0);
   static const Color disabled = Color(0xFFBDBDBD);
 }
