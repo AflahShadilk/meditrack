@@ -15,6 +15,13 @@ class DoseOccurrenceRepositoryImpl implements DoseOccurrenceRepository {
   }
 
   @override
+  Future<void> saveOccurrences(List<DoseOccurrence> occurrences) async {
+    final models =
+        occurrences.map((o) => DoseOccurrenceModel.fromEntity(o)).toList();
+    await _dataSource.saveOccurrences(models);
+  }
+
+  @override
   Future<DoseOccurrence?> getOccurrence(String id) async {
     final model = await _dataSource.getOccurrence(id);
     return model?.toEntity();
@@ -23,6 +30,13 @@ class DoseOccurrenceRepositoryImpl implements DoseOccurrenceRepository {
   @override
   Future<List<DoseOccurrence>> getOccurrences() async {
     final models = await _dataSource.getOccurrences();
+    return models.map((m) => m.toEntity()).toList();
+  }
+
+  @override
+  Future<List<DoseOccurrence>> getOccurrencesByMedicine(
+      String medicineId) async {
+    final models = await _dataSource.getOccurrencesByMedicine(medicineId);
     return models.map((m) => m.toEntity()).toList();
   }
 
